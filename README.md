@@ -1,2 +1,2 @@
 # softdev_premiumtraning
-Machine Learning apliation
+Machine Learning aplication
