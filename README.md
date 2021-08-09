@@ -25,6 +25,7 @@ Machine Learning aplication
 - Nearest Neighbor [ Neighbor , Centroid ]
 - Decision Trees []
 - Neural network [Backpropagation]
+        https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html
 
 
 # UX/UI :
