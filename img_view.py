@@ -301,7 +301,6 @@ PL = Prediction_Model()
 window = sg.Window("AI.EXE", main.Layout,element_justification='c',resizable=True,finalize=True)
 window.maximize()
 window.TKroot.minsize(550,200)
-
 window['-PP1-'].expand(expand_x=True, expand_y=True)
 window['-PP2-'].expand(expand_x=True, expand_y=True)
 window['-PP3-'].expand(expand_x=True, expand_y=True)
