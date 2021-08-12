@@ -24,15 +24,14 @@ class Code_generate():
 
 class Main():
     Layout = [
-        [sg.Text("XXXXX AI Premium Training", auto_size_text=True,
+        [sg.Text("AI Premium Training", auto_size_text=True,
                  font=("Helvetica", head_text),)],
-        [sg.Text(size=(1, 10))],
-        [sg.Button("pre-processing", font=("Helvetica", content_text), key="-PP1-", size=(20, 10), tooltip="Topic1: description"),
+        [sg.Text(size=(1,1))],    
+        [sg.Button("Data Pre-Processing",font=("Helvetica", content_text), key="-PP1-",  tooltip="Topic1: description"),
          sg.Button("Model Training", font=("Helvetica", content_text),
-                   key="-PP2-", size=(20, 10), tooltip="Topic2: description"),
-         sg.Button("Model Prediction", font=("Helvetica", content_text), key="-PP3-", size=(20, 10), tooltip="Topic3: description")],
-
-        [sg.Text(size=(1, 5))],
+                   key="-PP2-" , tooltip="Topic2: description"),
+         sg.Button("Prediction Model", font=("Helvetica", content_text), key="-PP3-", tooltip="Topic3: description")],
+ 
     ]
 
 
@@ -299,8 +298,13 @@ main = Main()
 pp = DataPreprocess()
 ML = Model_tranning()
 PL = Prediction_Model()
-window = sg.Window("AI.EXE", PL.Layout)
+window = sg.Window("AI.EXE", main.Layout,element_justification='c',resizable=True,finalize=True)
+window.maximize()
+window.TKroot.minsize(550,200)
 
+window['-PP1-'].expand(expand_x=True, expand_y=True)
+window['-PP2-'].expand(expand_x=True, expand_y=True)
+window['-PP3-'].expand(expand_x=True, expand_y=True)
 while True:
     event, values = window.read()
     if event == "OK" or event == WIN_CLOSED:
