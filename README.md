@@ -35,12 +35,12 @@ pySimpleGui : https://github.com/PySimpleGUI/PySimpleGUI
 https://www.datasciencelearner.com/how-to-compile-python-to-exe/
 
 # GUI  : Layout 
-function: 
+- function: 
         - by defualt full screen
         - can expand
-main:
+- main:
         -word made it's formal
-preproess:
+- preproess:
         - delete image button
         - image number buttom right(below image)
         - round button
@@ -50,11 +50,11 @@ preproess:
         ** click  list class to show image
         ** if possible show multi file
         ** pre-process for each file put it in next page**
-Training Model：
+- Training Model：
         - validation input
-result：
+- result：
         - 
-Model prediction：
+- Model prediction：
         - camera button
 
 
