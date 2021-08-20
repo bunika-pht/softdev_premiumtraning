@@ -207,8 +207,6 @@ while True:
                         break
 
 
-window_insert_data.Close()
-window_main.Close()
-window_prep.Close()
+
 
 
