@@ -25,30 +25,35 @@ class ModelSelection:
     # KNN
 
     # Decision_Trees
-    criterion: Literal["gini","ebtropy"],
-    splitter : Literal["best", "random"],
-    max_depth = 0,
-    max_leaf_nodes = 0
+    # criterion: Literal["gini","ebtropy"],
+    # splitter : Literal["best", "random"],
+    # max_depth = 0,
+    # max_leaf_nodes = 0
 
     
     # Neural_Network
     
     ):
         self.model = model
-        self.criterion = criterion,
-        self.splitter=splitter,
-        self.max_depth=max_depth,
-        self.max_leaf_nodes=max_leaf_nodes
+        # self.criterion = criterion,
+        # self.splitter=splitter,
+        # self.max_depth=max_depth,
+        # self.max_leaf_nodes=max_leaf_nodes
 
         self.n = 2 
     
-    def model_init(self):
+    def model_init(self,     
+    criterion: Literal["gini","ebtropy"],
+    splitter : Literal["best", "random"],
+    max_depth = 0,
+    max_leaf_nodes = 0):
+    
         if self.model == "Linear_Model":
             self.clf = RidgeClassifier()
         elif self.model == "SVM":
             self.clf = svm.SVC()
         elif self.model == "Decision_Trees":
-            self.clf = tree.DecisionTreeClassifier(criterion = self.criterion , splitter=self.splitter,max_depth=self.max_depth,max_leaf_nodes=self.max_leaf_nodes )
+            self.clf = tree.DecisionTreeClassifier(criterion  , splitter,max_depth,max_leaf_nodes=max_leaf_nodes )
             print(self.clf.get_params())
         elif self.model == "Neural_Network":
             self.clf = MLPClassifier()
@@ -67,7 +72,7 @@ class ModelSelection:
 
 
 
-MODEL = ModelSelection(model="Decision_Trees",criterion="gini",splitter="best",max_depth=10 ,max_leaf_nodes=4)
+MODEL = ModelSelection(model="SVM")
 MODEL.model_init()
 
 # def model_selection():
