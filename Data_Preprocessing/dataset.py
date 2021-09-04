@@ -2,7 +2,7 @@ import os
 import cv2 as cv
 import numpy as np
 import math
-import matplotlib
+import mahotas
 x=0
 y=0
 w=0
@@ -10,9 +10,9 @@ h =0
 
 path_screw_black = r"D:\1_document\internship\dataset"
 path_screw_white = r"D:\1_document\internship\dataset12\dataset"
-output= r"D:\1_document\work\softdev_premiumtraning\softdev_premiumtraning\Data_Preprocessing\feature_out\gray_scw"
+output= r"D:\1_document\work\softdev_premiumtraning\softdev_premiumtraning\Data_Preprocessing\feature_out\haralick\white"
 
-value =np.loadtxt('HSV_value_white.txt',dtype='int',delimiter=',')
+value =np.loadtxt(r'D:\1_document\work\softdev_premiumtraning\softdev_premiumtraning\Data_Preprocessing\feature_out\HSV_value_white.txt',dtype='int',delimiter=',')
 name_black = os.listdir(path_screw_black)
 name_white = os.listdir(path_screw_white)
 
@@ -55,7 +55,8 @@ for fname in name_white:
     edges_of_image = cv.Canny(resized,0,50) 
    
     gray = cv.cvtColor(resized,cv.COLOR_BGR2GRAY)
-    np.save(out+'.npy',gray)
+    image_har = mahotas.features.haralick(gray).mean(axis=0)
+    np.save(out+'.npy',image_har)
     # np.save(out+'.npy',gray)
 # for fname in name_white:
 #     pic = cv.imread(os.path.join(path_screw_white,fname),0)
