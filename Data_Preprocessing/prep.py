@@ -4,7 +4,7 @@ import os
 import glob
 import fnmatch
 from PySimpleGUI.PySimpleGUI import WIN_CLOSED
-
+import cv2 as cv
 SYMBOL_UP = '▲'
 SYMBOL_DOWN = '▼'
 
@@ -54,8 +54,8 @@ class DataPreprocess():
             sg.Button("Add", key="-ADD CLASS-"),
         ],
         [
-            sg.Listbox(values=["1.png", "2.png", "3.png"], enable_events=True,
-                       size=(70, content_text), key="-FILE LIST-", select_mode='extended')
+            sg.Listbox(values=[], enable_events=True,
+                       size=(70, content_text), key="-FILE LIST-")
         ],
         [
             sg.Button("Delete", key="-DEL IMG-")
@@ -87,11 +87,8 @@ class DataPreprocess():
          sg.Column(image_viewer_colum, element_justification='center', key="-CL2-")],
     ]
 
-    resize_section = [[sg.Input('Input sec 1', key='-IN1-')],
-                      # [sg.Input(key='-IN11-')],
-                      # [sg.Button('Button section 1',  button_color='yellow on green'),
-                      #  sg.Button('Button2 section 1', button_color='yellow on green'),
-                      #  sg.Button('Button3 section 1', button_color='yellow on green')]
+    resize_section = [[sg.Input('width', key='-IN1-', size=(10, 1)), sg.Input('high', key='-IN2-', size=(10, 1))]
+
                       ]
 
     rotation_section = [[sg.Button('Left'), sg.Button('Right')]]
@@ -188,7 +185,7 @@ while True:
     event1, values1 = window_main.read()
     if event1 == WIN_CLOSED:
         break
-    if event1 == '-PREP-' and not window_insert_active:
+    elif event1 == '-PREP-' and not window_insert_active:
         window_insert_active = True
         window_main.Hide()
         window_insert_data = sg.Window(
@@ -199,26 +196,47 @@ while True:
             if event2 == sg.WIN_CLOSED:
                 window_insert_active = False
                 break
-            if event2 == '-FOLDER-':
+            elif event2 == '-FOLDER-':
                 folder = values2['-FOLDER-']
-                list_file = []
-                for filename in os.listdir(folder):
-                    if fnmatch.fnmatch(filename, '*.png'):
-                        list_file.append(filename)
-                window_insert_data['-FILE LIST-'].update(list_file)
+                try:
+                    # Get list of files in folder
+                    file_list = os.listdir(folder)
+                except:
+                    file_list = []
+                fnames = [
+                    f
+                    for f in file_list
+                    if os.path.isfile(os.path.join(folder, f))
+                    and f.lower().endswith((".png", ".jpg", ".jpeg"))
+                ]
+                window_insert_data['-FILE LIST-'].update(fnames)
+            elif event2 == "-FILE LIST-":  # A file was chosen from the listbox
+                try:
+                    filename = os.path.join(
+                        values2["-FOLDER-"], values2["-FILE LIST-"][0])
+                    window_insert_data["-TOUT1-"].update(filename)
+                    window_insert_data["-IMAGE1-"].update(filename=filename)
+                except:
+                    pass
 
-                print(os.listdir(folder))
-            if event2 == '-NEXT-' and not window_prep_active:
+            elif event2 == '-NEXT-' and not window_prep_active:
                 window_insert_active = False
                 window_prep_active = True
                 window_insert_data.Hide()
                 window_prep = sg.Window(
                     "AI.EXE", pp.Layout_Data_Preprocess, resizable=True, finalize=True)
                 while True:
-                    event3, value3 = window_prep.read()
+                    event3, values3 = window_prep.read()
+                    window_prep['-FILE LIST-'].update(fnames)
+
                     if event3 == sg.WIN_CLOSED:
                         window_prep_active = False
                         break
-            if event2 == '-BACK-' and not window_insert_active:
-                window_insert_active = True
-                window_insert_data()
+                    elif event3 == "-FILE LIST-":  # A file was chosen from the listbox
+                        try:
+                            filename = os.path.join(
+                                values2["-FOLDER-"], values3["-FILE LIST-"][0])
+                            window_prep["-IMAGE-"].update(
+                                filename=filename, size=(500, 300))
+                        except:
+                            pass
