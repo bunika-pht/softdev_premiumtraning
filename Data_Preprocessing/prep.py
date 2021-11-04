@@ -182,6 +182,7 @@ window_insert_active = False
 
 
 while True:
+    # * menu page
     event1, values1 = window_main.read()
     if event1 == WIN_CLOSED:
         break
@@ -192,6 +193,7 @@ while True:
             "AI.EXE", pp.Layout_InserDataset, resizable=True, finalize=True)
         window_prep_active = False
         while True:
+            # * insert data page
             event2, values2 = window_insert_data.Read()
             if event2 == sg.WIN_CLOSED:
                 window_insert_active = False
@@ -199,7 +201,7 @@ while True:
             elif event2 == '-FOLDER-':
                 folder = values2['-FOLDER-']
                 try:
-                    # Get list of files in folder
+                    # ? Get list of files in folder
                     file_list = os.listdir(folder)
                 except:
                     file_list = []
@@ -238,6 +240,7 @@ while True:
                 window_prep = sg.Window(
                     "AI.EXE", pp.Layout_Data_Preprocess, resizable=True, finalize=True)
                 while True:
+                    # * pre-sprocess page
                     event3, values3 = window_prep.read()
                     window_prep['-FILE LIST-'].update(fnames)
 
