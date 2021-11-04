@@ -26,12 +26,12 @@ class Main():
     Layout = [
         [sg.Text("AI Premium Training", auto_size_text=True,
                  font=("Helvetica", head_text),)],
-        [sg.Text(size=(1,1))],    
-        [sg.Button("Data Pre-Processing",font=("Helvetica", content_text), key="-PP1-",  tooltip="Topic1: description"),
+        [sg.Text(size=(1, 1))],
+        [sg.Button("Data Pre-Processing", font=("Helvetica", content_text), key="-PP1-",  tooltip="Topic1: description"),
          sg.Button("Model Training", font=("Helvetica", content_text),
-                   key="-PP2-" , tooltip="Topic2: description"),
+                   key="-PP2-", tooltip="Topic2: description"),
          sg.Button("Model Prediction", font=("Helvetica", content_text), key="-PP3-", tooltip="Topic3: description")],
- 
+
     ]
 
 
@@ -48,12 +48,12 @@ class DataPreprocess():
         ],
         [
             sg.Text("Class       "),
-            sg.Input(key='-CLASS TYPE-', enable_events=True, size=(70,20)),
+            sg.Input(key='-CLASS TYPE-', enable_events=True, size=(70, 20)),
             sg.Button("Add", key="-ADD CLASS-"),
         ],
         [
-         sg.Listbox(values=["1.png","2.png","3.png"], enable_events=True,
-                       size=(70, content_text), key="-FILE LIST-",select_mode='extended')
+            sg.Listbox(values=["1.png", "2.png", "3.png"], enable_events=True,
+                       size=(70, content_text), key="-FILE LIST-", select_mode='extended')
         ],
         [
             sg.Button("Delete", key="-DEL IMG-")
@@ -64,24 +64,25 @@ class DataPreprocess():
 
         [
             sg.Listbox(values=[], enable_events=True,
-                       size=(70,10), key="-CLASS LIST-")
+                       size=(70, 10), key="-CLASS LIST-")
         ],
-         [sg.Column([[sg.Button("Back", key="-BACK-")]],element_justification='left'),sg.Text(size=(70,1)),sg.Column([[sg.Button("Next", key="-NEXT-")]],element_justification='right')],
+        [sg.Column([[sg.Button("Back", key="-BACK-")]], element_justification='left'), sg.Text(
+            size=(70, 1)), sg.Column([[sg.Button("Next", key="-NEXT-")]], element_justification='right')],
     ]
-    
+
     image_viewer_colum = [
         [sg.Text("choose an image from the list on the left")],
-        [sg.Text(size=(70,1), key="-TOUT1-")],
-        [sg.Image(key="-IMAGE1-",size=(70,500))],
-        
-          [sg.Text("1/299",key="-N IMG-",size=(70,1),justification="right")],
-        
+        [sg.Text(size=(70, 1), key="-TOUT1-")],
+        [sg.Image(key="-IMAGE1-", size=(70, 500))],
+
+        [sg.Text("1/299", key="-N IMG-", size=(70, 1), justification="right")],
+
     ]
 
     Layout_InserDataset = [
         [sg.Text('Insert Data')],
-        [sg.Column(file_list_colum,element_justification='left',key="-CL1-"), sg.VSeparator(),
-        sg.Column(image_viewer_colum,element_justification='center',key="-CL2-")],
+        [sg.Column(file_list_colum, element_justification='left', key="-CL1-"), sg.VSeparator(),
+         sg.Column(image_viewer_colum, element_justification='center', key="-CL2-")],
     ]
 
     resize_section = [[sg.Input('Input sec 1', key='-IN1-')],
@@ -111,19 +112,19 @@ class DataPreprocess():
         [sg.Text('  Noise'), sg.Text('', key='-OUTPUT_N-')],
         [sg.T(' 0', size=(4, 1), key='-LEFT3-'),
          sg.Slider((0, 100), key='-SLIDER_N-', orientation='h',
-                   enable_events=True, disable_number_display=True,tooltip="description"),
+                   enable_events=True, disable_number_display=True, tooltip="description"),
          sg.T(' 100', size=(4, 1), key='-RIGHT3-')],
 
         [sg.Text('  Gaussian'), sg.Text('', key='-OUTPUT_G-')],
         [sg.T(' 0', size=(4, 1), key='-LEFT4-'),
          sg.Slider((0, 100), key='-SLIDER_G-', orientation='h',
-                   enable_events=True, disable_number_display=True,tooltip="description"),
+                   enable_events=True, disable_number_display=True, tooltip="description"),
          sg.T(' 100', size=(4, 1), key='-RIGHT4-')],
 
         [sg.Text('  Median'), sg.Text('', key='-OUTPUT_M-')],
         [sg.T(' 0', size=(4, 1), key='-LEFT5-'),
          sg.Slider((0, 100), key='-SLIDER_M-', orientation='h',
-                   enable_events=True, disable_number_display=True,tooltip="description"),
+                   enable_events=True, disable_number_display=True, tooltip="description"),
          sg.T(' 100', size=(4, 1), key='-RIGHT5-')],
     ]
 
@@ -153,7 +154,7 @@ class DataPreprocess():
     ]
     layout_tab = [
         [sg.TabGroup([[sg.Tab('Pre-process', section_column_tab1),
-                     sg.Tab('Feature Extraction', feature_extraction_tab2)]],size=(500,400))],
+                     sg.Tab('Feature Extraction', feature_extraction_tab2)]], size=(500, 400))],
         [sg.Button("Export CSV", key="-CSV-")],
     ]
 
@@ -166,19 +167,19 @@ class DataPreprocess():
     ]
     Layout_Data_Preprocess = [
         [sg.Text("Data Preprocessing")],
-        [sg.Column(image_viewer_colum_pp,element_justification='left'),
-         sg.VSeperator(), sg.Column(layout_tab,element_justification='right')],
+        [sg.Column(image_viewer_colum_pp, element_justification='left'),
+         sg.VSeperator(), sg.Column(layout_tab, element_justification='right')],
         Code_generate.Layout,
 
     ]
 
 
-
 main = Main()
 pp = DataPreprocess()
-window = sg.Window("AI.EXE", pp.Layout_Data_Preprocess,resizable=True,finalize=True)
+window = sg.Window("AI.EXE", pp.Layout_Data_Preprocess,
+                   resizable=True, finalize=True)
 window.maximize()
-window.TKroot.minsize(550,200)
+window.TKroot.minsize(550, 200)
 # window['-CL1-'].expand(expand_x=True, expand_y=True)
 # window['-CL2-'].expand(expand_x=True, expand_y=True)
 # window['-PP1-'].expand(expand_x=True, expand_y=True)

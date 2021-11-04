@@ -218,6 +218,18 @@ while True:
                     window_insert_data["-IMAGE1-"].update(filename=filename)
                 except:
                     pass
+            elif event2 == "-DEL IMG-":
+                try:
+                    os.remove(filename)
+                except:
+                    pass
+                file_list = os.listdir(folder)
+                fnames = [
+                    f
+                    for f in file_list
+                    if os.path.isfile(os.path.join(folder, f))
+                    and f.lower().endswith((".png", ".jpg", ".jpeg"))]
+                window_insert_data["-FILE LIST-"].update(fnames)
 
             elif event2 == '-NEXT-' and not window_prep_active:
                 window_insert_active = False
