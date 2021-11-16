@@ -74,7 +74,7 @@ class DataPreprocess():
 
     image_viewer_colum = [
         [sg.Text("choose an image from the list on the left")],
-        [sg.Text(size=(70, 1), key="-TOUT1-")],
+        [sg.Text(size=(70, 1), key="-IMG NAME-")],
         [sg.Image(key="-IMAGE1-", size=(70, 500))],
 
         [sg.Text("1/299", key="-N IMG-", size=(70, 1), justification="right")],
@@ -87,23 +87,24 @@ class DataPreprocess():
          sg.Column(image_viewer_colum, element_justification='center', key="-CL2-")],
     ]
 
-    resize_section = [[sg.Input('width', key='-IN1-', size=(10, 1)), sg.Input('high', key='-IN2-', size=(10, 1))]
+    resize_section = [[sg.Input('width', key='-IN WIDTH-', size=(10, 1)), sg.Input('high', key='-IN HIGH-', size=(10, 1))]
 
                       ]
 
-    rotation_section = [[sg.Button('Left'), sg.Button('Right')]]
+    rotation_section = [
+        [sg.Button('Left', key='-TL-'), sg.Button('Right', key='-TR-')]]
 
     bright_and_contrast_section = [
-        [sg.Text('  brightness'), sg.Text('', key='-OUTPUT_B-')],
-        [sg.T(' 0', size=(4, 1), key='-LEFT1-'),
-         sg.Slider((0, 100), key='-SLIDER_Bri-', orientation='h',
+        [sg.Text('  brightness'), sg.Text('', key='-TEXT BRIGHT-')],
+        [sg.T(' 0', size=(4, 1), key='-MIN BRIGHT-'),
+         sg.Slider((0, 100), key='-SLIDER BRIGHT-', orientation='h',
                    enable_events=True, disable_number_display=True),
-         sg.T(' 100', size=(4, 1), key='-RIGHT1-')],
-        [sg.Text('  contrast'), sg.Text('', key='-OUTPUT_C-')],
-        [sg.T(' 0', size=(4, 1), key='-LEFT2-'),
-         sg.Slider((0, 100), key='-SLIDER_Con-', orientation='h',
+         sg.T(' 100', size=(4, 1), key='-MAX BRIGHT-')],
+        [sg.Text('  contrast'), sg.Text('', key='-TEXT CONTRAST')],
+        [sg.T(' 0', size=(4, 1), key='-MIN CONTRAST-'),
+         sg.Slider((0, 100), key='-SLIDER CONTRAST-', orientation='h',
                    enable_events=True, disable_number_display=True),
-         sg.T(' 100', size=(4, 1), key='-RIGHT2-')]
+         sg.T(' 100', size=(4, 1), key='-MAX CONTRAST-')]
     ]
 
     # '''Blur () [ Gaussian, Median, Blur ]'''
