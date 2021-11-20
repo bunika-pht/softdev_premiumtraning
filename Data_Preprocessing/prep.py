@@ -181,78 +181,82 @@ window_main.maximize()
 window_main.TKroot.minsize(550, 200)
 window_insert_active = False
 
+# if __name__ == main:
+#     try:
+#         pass
+#     except:
+#         pass
+# while True:
+#     # * menu page
+#     event1, values1 = window_main.read()
+#     if event1 == WIN_CLOSED:
+#         break
+#     elif event1 == '-PREP-' and not window_insert_active:
+#         window_insert_active = True
+#         window_main.Hide()
+#         window_insert_data = sg.Window(
+#             "AI.EXE", pp.Layout_InserDataset, resizable=True, finalize=True)
+#         window_prep_active = False
+#         while True:
+#             # * insert data page
+#             event2, values2 = window_insert_data.Read()
+#             if event2 == sg.WIN_CLOSED:
+#                 window_insert_active = False
+#                 break
+#             elif event2 == '-FOLDER-':
+#                 folder = values2['-FOLDER-']
+#                 try:
+#                     # ? Get list of files in folder
+#                     file_list = os.listdir(folder)
+#                 except:
+#                     file_list = []
+#                 fnames = [
+#                     f
+#                     for f in file_list
+#                     if os.path.isfile(os.path.join(folder, f))
+#                     and f.lower().endswith((".png", ".jpg", ".jpeg"))
+#                 ]
+#                 window_insert_data['-FILE LIST-'].update(fnames)
+#             elif event2 == "-FILE LIST-":  # A file was chosen from the listbox
+#                 try:
+#                     filename = os.path.join(
+#                         values2["-FOLDER-"], values2["-FILE LIST-"][0])
+#                     window_insert_data["-TOUT1-"].update(filename)
+#                     window_insert_data["-IMAGE1-"].update(filename=filename)
+#                 except:
+#                     pass
+#             elif event2 == "-DEL IMG-":
+#                 try:
+#                     os.remove(filename)
+#                 except:
+#                     pass
+#                 file_list = os.listdir(folder)
+#                 fnames = [
+#                     f
+#                     for f in file_list
+#                     if os.path.isfile(os.path.join(folder, f))
+#                     and f.lower().endswith((".png", ".jpg", ".jpeg"))]
+#                 window_insert_data["-FILE LIST-"].update(fnames)
 
-while True:
-    # * menu page
-    event1, values1 = window_main.read()
-    if event1 == WIN_CLOSED:
-        break
-    elif event1 == '-PREP-' and not window_insert_active:
-        window_insert_active = True
-        window_main.Hide()
-        window_insert_data = sg.Window(
-            "AI.EXE", pp.Layout_InserDataset, resizable=True, finalize=True)
-        window_prep_active = False
-        while True:
-            # * insert data page
-            event2, values2 = window_insert_data.Read()
-            if event2 == sg.WIN_CLOSED:
-                window_insert_active = False
-                break
-            elif event2 == '-FOLDER-':
-                folder = values2['-FOLDER-']
-                try:
-                    # ? Get list of files in folder
-                    file_list = os.listdir(folder)
-                except:
-                    file_list = []
-                fnames = [
-                    f
-                    for f in file_list
-                    if os.path.isfile(os.path.join(folder, f))
-                    and f.lower().endswith((".png", ".jpg", ".jpeg"))
-                ]
-                window_insert_data['-FILE LIST-'].update(fnames)
-            elif event2 == "-FILE LIST-":  # A file was chosen from the listbox
-                try:
-                    filename = os.path.join(
-                        values2["-FOLDER-"], values2["-FILE LIST-"][0])
-                    window_insert_data["-TOUT1-"].update(filename)
-                    window_insert_data["-IMAGE1-"].update(filename=filename)
-                except:
-                    pass
-            elif event2 == "-DEL IMG-":
-                try:
-                    os.remove(filename)
-                except:
-                    pass
-                file_list = os.listdir(folder)
-                fnames = [
-                    f
-                    for f in file_list
-                    if os.path.isfile(os.path.join(folder, f))
-                    and f.lower().endswith((".png", ".jpg", ".jpeg"))]
-                window_insert_data["-FILE LIST-"].update(fnames)
+#             elif event2 == '-NEXT-' and not window_prep_active:
+#                 window_insert_active = False
+#                 window_prep_active = True
+#                 window_insert_data.Hide()
+#                 window_prep = sg.Window(
+#                     "AI.EXE", pp.Layout_Data_Preprocess, resizable=True, finalize=True)
+#                 while True:
+#                     # * pre-sprocess page
+#                     event3, values3 = window_prep.read()
+#                     window_prep['-FILE LIST-'].update(fnames)
 
-            elif event2 == '-NEXT-' and not window_prep_active:
-                window_insert_active = False
-                window_prep_active = True
-                window_insert_data.Hide()
-                window_prep = sg.Window(
-                    "AI.EXE", pp.Layout_Data_Preprocess, resizable=True, finalize=True)
-                while True:
-                    # * pre-sprocess page
-                    event3, values3 = window_prep.read()
-                    window_prep['-FILE LIST-'].update(fnames)
-
-                    if event3 == sg.WIN_CLOSED:
-                        window_prep_active = False
-                        break
-                    elif event3 == "-FILE LIST-":  # A file was chosen from the listbox
-                        try:
-                            filename = os.path.join(
-                                values2["-FOLDER-"], values3["-FILE LIST-"][0])
-                            window_prep["-IMAGE-"].update(
-                                filename=filename, size=(500, 300))
-                        except:
-                            pass
+#                     if event3 == sg.WIN_CLOSED:
+#                         window_prep_active = False
+#                         break
+#                     elif event3 == "-FILE LIST-":  # A file was chosen from the listbox
+#                         try:
+#                             filename = os.path.join(
+#                                 values2["-FOLDER-"], values3["-FILE LIST-"][0])
+#                             window_prep["-IMAGE-"].update(
+#                                 filename=filename, size=(500, 300))
+#                         except:
+#                             pass
