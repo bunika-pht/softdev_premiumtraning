@@ -7,12 +7,9 @@ from PySimpleGUI.PySimpleGUI import WIN_CLOSED
 import cv2 as cv
 SYMBOL_UP = '▲'
 SYMBOL_DOWN = '▼'
-
-
 head_text = 30
 content_text = 15
 sg.theme('Reddit')
-
 ''' https://pysimplegui.readthedocs.io/en/latest/cookbook/#recipe-collapsible-sections-visible-invisible-elements'''
 
 
@@ -40,6 +37,18 @@ class DataPreprocess():
 
     def collapse(layout, key):
         return sg.pin(sg.Column(layout, key=key))
+
+    # def AddtoClass(value,key_classname,key_listfile):
+    #     folder = value['-FOLDER-']
+    #     file_list = os.listdir(folder)
+    #     fnames = [
+    #             f
+    #             for f in file_list
+    #             if os.path.isfile(os.path.join(folder, f))
+    #             and f.lower().endswith((".png", ".jpg", ".jpeg"))
+    #         ]
+    #     F_classname = value["-CLASS TYPE-"]
+    #     isFile = os.path.isfile(os.path.join("Class",F_classname))
 
     file_list_colum = [
         [
