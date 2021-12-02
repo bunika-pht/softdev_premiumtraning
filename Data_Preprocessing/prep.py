@@ -96,7 +96,7 @@ class DataPreprocess():
          sg.Column(image_viewer_colum, element_justification='center', key="-CL2-")],
     ]
 
-    resize_section = [[sg.Input('width', key='-IN WIDTH-', size=(10, 1)), sg.Input('high', key='-IN HIGH-', size=(10, 1))]
+    resize_section = [[sg.Input('width', key='-IN WIDTH-', size=(10, 1)), sg.Input('high', key='-IN HIGH-', size=(10, 1)), sg.Button("Resize", key="-RZ-")]
 
                       ]
 
@@ -173,10 +173,18 @@ class DataPreprocess():
             sg.Listbox(values=[], enable_events=True,
                        size=(100, 5), key="-FILE LIST-")
         ],
+
     ]
+    List_viewer_column = [
+
+        [sg.Listbox(values=[], enable_events=True,
+                    size=(10, 5), key="-CLASS LIST-")],
+
+    ]
+
     Layout_Data_Preprocess = [
         [sg.Text("Data Preprocessing")],
-        [sg.Column(image_viewer_colum_pp, element_justification='left'),
+        [sg.Column(List_viewer_column), sg.Column(image_viewer_colum_pp, element_justification='left'),
          sg.VSeperator(), sg.Column(layout_tab, element_justification='right')],
         Code_generate.Layout,
 
